@@ -19,7 +19,17 @@ button.d{background:transparent;border:1px solid var(--dn);color:var(--dn);box-s
 button.s{padding:5px 11px;font-size:.85rem;border-radius:99px}
 .tabs{display:flex;gap:6px;margin:8px 0;position:sticky;top:0;z-index:5;padding:6px 0;background:#07120de6;backdrop-filter:blur(8px)}
 .tabs button{flex:1;padding:9px 2px;font-size:.8rem;background:#ffffff12;box-shadow:none;color:var(--mu);border-radius:14px}
-.tabs button.on{background:linear-gradient(135deg,var(--gd),#ffb300);color:#241a00}
+.tabs button{position:relative;z-index:1}
+.tabs button.on{background:transparent;color:#241a00}
+.tabpill{position:absolute;top:6px;bottom:6px;left:0;width:0;border-radius:14px;background:linear-gradient(135deg,var(--gd),#ffb300);transition:left .32s cubic-bezier(.3,.8,.3,1),width .32s cubic-bezier(.3,.8,.3,1);z-index:0;pointer-events:none}
+#v.go>*{animation:tin .42s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*55ms)}
+@keyframes tin{from{opacity:0;transform:translateX(var(--dx,28px))}to{opacity:1;transform:none}}
+#v.go .bar i{animation:barfill .9s .25s cubic-bezier(.2,.8,.2,1) both}
+@keyframes barfill{from{width:0}}
+#v.go .pod>div{animation:rise .65s cubic-bezier(.2,.9,.3,1.2) both}
+#v.go .pod>div:nth-child(3){animation-delay:.1s}#v.go .pod>div:nth-child(1){animation-delay:.25s}#v.go .pod>div:nth-child(2){animation-delay:.45s}
+@keyframes rise{from{opacity:0;transform:translateY(46px) scale(.9)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#v.go>*,#v.go .bar i,#v.go .pod>div{animation:none!important}.tabpill{transition:none}}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--bd)}
 .pill{background:#ffd54a26;color:var(--gd);border-radius:99px;padding:2px 11px;font-size:.85rem;font-weight:700}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -64,7 +74,7 @@ button.s{padding:5px 11px;font-size:.85rem;border-radius:99px}
 #ls .lsw{display:flex;align-items:center;justify-content:center;opacity:.8}
 </style></head><body><main>
 <div class="hero"><div class="lg">🏸</div><div><h1>ASMR <b>Badminton</b></h1><div class="mu" id="role">Memuat…</div></div></div><div id="lg" style="margin:6px 0"></div>
-<div class="tabs"><button data-t="j" class="on">📅 Jadwal</button><button data-t="k">🏆 Klasemen</button><button data-t="r">🎰 Roulette</button><button data-t="c">💰 Kas</button><button data-t="p">👥 Pemain</button></div>
+<div class="tabs"><i class="tabpill"></i><button data-t="j" class="on">📅 Jadwal</button><button data-t="k">🏆 Klasemen</button><button data-t="r">🎰 Roulette</button><button data-t="c">💰 Kas</button><button data-t="p">👥 Pemain</button></div>
 <div id="v"><p class="mu">Memuat…</p></div>
 </main><div id="ls"></div>
 <script type="module">
@@ -217,7 +227,7 @@ const sdt=d=>{try{return new Date(d+'T00:00').toLocaleDateString('id-ID',{day:'n
 function kas(){
   const rows=S.filter(s=>(s.hadir||[]).length||(s.exp||[]).length).sort((a,b)=>b.date.localeCompare(a.date)).map(s=>({s,k:kasOf(s)}));
   const tot=rows.reduce((a,r)=>a+r.k.kas,0),pot=rows.reduce((a,r)=>a+r.k.kpot,0);
-  return `<div class="card"><b>💰 Kas jalan-jalan akhir tahun</b><div class="${tot>=0?'w':''}" style="font-size:1.8rem;margin:6px 0">${rs(tot)}</div><div class="mu">Selisih iuran yang sudah terkumpul (lunas) dikurangi pengeluaran, dijumlahkan dari semua sesi.${pot!==tot?' Jika semua iuran sudah lunas: '+rs(pot)+'.':''}</div></div><div class="card"><b>Per minggu</b><div class="x"><table><tr><th>Tanggal</th><th>Iuran</th><th>Biaya</th><th>Kas</th></tr>${rows.map(r=>`<tr><td>${esc(sdt(r.s.date))}</td><td>${rp(r.k.coll)}</td><td>${rp(r.k.tot)}</td><td class="${r.k.kas>=0?'w':''}">${r.k.kas>=0?'+':''}${rs(r.k.kas)}</td></tr>`).join('')||'<tr><td colspan=4 class="mu">Belum ada data.</td></tr>'}</table></div></div><div class="card"><button class="o" data-csv="k">Unduh CSV kas mingguan</button></div>`;
+  return `<div class="card"><b>💰 Kas jalan-jalan akhir tahun</b><div class="cnt ${tot>=0?'w':''}" data-n="${tot}" style="font-size:1.8rem;margin:6px 0">${rs(tot)}</div><div class="mu">Selisih iuran yang sudah terkumpul (lunas) dikurangi pengeluaran, dijumlahkan dari semua sesi.${pot!==tot?' Jika semua iuran sudah lunas: '+rs(pot)+'.':''}</div></div><div class="card"><b>Per minggu</b><div class="x"><table><tr><th>Tanggal</th><th>Iuran</th><th>Biaya</th><th>Kas</th></tr>${rows.map(r=>`<tr><td>${esc(sdt(r.s.date))}</td><td>${rp(r.k.coll)}</td><td>${rp(r.k.tot)}</td><td class="${r.k.kas>=0?'w':''}">${r.k.kas>=0?'+':''}${rs(r.k.kas)}</td></tr>`).join('')||'<tr><td colspan=4 class="mu">Belum ada data.</td></tr>'}</table></div></div><div class="card"><button class="o" data-csv="k">Unduh CSV kas mingguan</button></div>`;
 }
 const won=(m,z,x,y)=>m.gw?(z==='a'?m.gw[0]>m.gw[1]:m.gw[1]>m.gw[0]):x>y;
 const cl=o=>JSON.parse(JSON.stringify(o));
@@ -301,15 +311,25 @@ function closeLs(){
   render();
 }
 const podium=rows=>{const t=rows.filter(o=>o.g>0).slice(0,3);if(!t.length)return '';const em=['🏆','🥈','🥉'],ord=t.length>=3?[1,0,2]:t.map((_,i)=>i);return `<div class="pod">${ord.map(i=>`<div class="p${i+1}"><div class="em">${em[i]}</div><div class="nm">${esc(t[i].n)}</div><div class="pt">${t[i].p}</div><div class="mu">${t[i].w}/${t[i].g} menang</div></div>`).join('')}</div>`};
+const TABS=['j','k','r','c','p'],RM=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+let tabDir=1,animTab=false,animT=null;
+function movePill(){const b=document.querySelector('.tabs button.on'),p=document.querySelector('.tabpill');if(b&&p){p.style.left=b.offsetLeft+'px';p.style.width=b.offsetWidth+'px'}}
+window.addEventListener('resize',movePill);setTimeout(movePill,0);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(movePill);
+function countUp(){document.querySelectorAll('.cnt').forEach(el=>{const n=+el.dataset.n,t0=performance.now(),st=t=>{const k=Math.min(1,(t-t0)/700);el.textContent=rs(n*(1-Math.pow(1-k,3)));if(k<1&&el.isConnected)requestAnimationFrame(st)};requestAnimationFrame(st)})}
 function render(){
   if(lsId)lsRender();if(spinning){pend=true;return}const a=document.activeElement;if(a&&a.dataset&&a.dataset.d){pend=true;return}
   $('#role').textContent=db?(adm?'Mode admin — bisa input & edit':'Mode lihat saja'):'Memuat…';
-  if(db)$('#v').innerHTML=waCard()+({j:jadwal,k:klas,r:roul,c:kas,p:players})[tab]();
+  if(db){
+    const v=$('#v'),go=animTab&&!RM;animTab=false;
+    v.classList.remove('go');
+    v.innerHTML=waCard()+({j:jadwal,k:klas,r:roul,c:kas,p:players})[tab]();
+    if(go){[...v.children].forEach((c,i)=>c.style.setProperty('--i',Math.min(i,9)));v.style.setProperty('--dx',(tabDir>0?28:-28)+'px');void v.offsetWidth;v.classList.add('go');clearTimeout(animT);animT=setTimeout(()=>v.classList.remove('go'),1100);if(tab==='c')countUp()}
+  }
 }
 document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.d;if(k)D[k]=e.target.value});
 document.addEventListener('focusout',()=>{if(pend){pend=false;setTimeout(render,350)}});
 document.addEventListener('change',e=>{if(e.target.id==='sel'){selS=e.target.value;render()}else if(adm&&e.target.dataset&&e.target.dataset.pl)db.doc('players/'+e.target.dataset.pl).update({lv:+e.target.value}).catch(()=>alert('Gagal mengubah level.'))});
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));render()});
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{const o=TABS.indexOf(tab),n=TABS.indexOf(b.dataset.t);tab=b.dataset.t;if(o!==n){tabDir=n>o?1:-1;animTab=true}document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));movePill();render()});
 async function gen(sid){
   const s=S.find(x=>x.id===sid),hd=s.hadir||[],ms=M.filter(m=>m.sid===sid),busy=new Set();
   ms.filter(m=>m.st==='main').forEach(m=>nm(m).forEach(n=>busy.add(n)));
@@ -420,10 +440,14 @@ if(firebaseConfig.apiKey==='ISI'){
   const fb=initializeApp(firebaseConfig),fdb=getFirestore(fb),fa=getAuth(fb);
   db={collection:c=>({add:async d=>{const r=await addDoc(collection(fdb,c),enc(d));return{id:r.id}}}),
       doc:p=>{const k=p.split('/'),r=doc(fdb,k[0],k[1]);return{set:d=>setDoc(r,enc(d)),update:d=>updateDoc(r,enc(d)),delete:()=>deleteDoc(r)}}};
+  const loginErr=e=>{
+    const m={'auth/unauthorized-domain':'Domain "'+location.hostname+'" belum ditambahkan di Firebase: Authentication > Settings > Authorized domains.','auth/operation-not-allowed':'Login Google belum diaktifkan di Firebase: Authentication > Sign-in method.','auth/popup-blocked':'Popup diblokir browser. Izinkan popup untuk situs ini lalu coba lagi.','auth/popup-closed-by-user':'Jendela login ditutup sebelum selesai.','auth/cancelled-popup-request':'Permintaan login dibatalkan. Tekan tombol sekali saja.','auth/network-request-failed':'Koneksi internet bermasalah.'};
+    alert((m[e.code]||'Gagal masuk.')+'\n\nKode: '+(e.code||e.message));
+  };
   const ui=()=>{
     $('#lg').innerHTML=user?`<span class="mu">${esc(user.email)}${adm?' · admin':' · bukan admin'}</span> <button class="s o" id="lo">Keluar</button>`:'<button class="s" id="li">Masuk admin (Google)</button>';
     if(user)$('#lo').onclick=()=>signOut(fa);
-    else $('#li').onclick=()=>signInWithPopup(fa,new GoogleAuthProvider()).catch(e=>alert('Gagal masuk: '+e.message));
+    else $('#li').onclick=()=>signInWithPopup(fa,new GoogleAuthProvider()).catch(loginErr);
   };
   const sub=(c,f)=>onSnapshot(collection(fdb,c),s=>{f(s.docs.map(d=>Object.assign({id:d.id},dec(d.data()))));render()},()=>{$('#v').innerHTML='<p class="mu">Data belum bisa dimuat. Periksa koneksi internet dan aturan Firestore.</p>'});
   sub('sessions',x=>S=x);sub('players',x=>P=x);sub('matches',x=>M=x);sub('live',x=>L=x);
