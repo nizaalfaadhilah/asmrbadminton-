@@ -18,7 +18,7 @@ button.o{background:transparent;border:1px solid #ffffff33;box-shadow:none}
 button.d{background:transparent;border:1px solid var(--dn);color:var(--dn);box-shadow:none}
 button.s{padding:5px 11px;font-size:.85rem;border-radius:99px}
 .tabs{display:flex;gap:6px;margin:8px 0;position:sticky;top:0;z-index:5;padding:6px 0;background:#07120de6;backdrop-filter:blur(8px)}
-.tabs button{flex:1;padding:9px 2px;font-size:.8rem;background:#ffffff12;box-shadow:none;color:var(--mu);border-radius:14px}
+.tabs button{flex:1;padding:7px 1px;font-size:.68rem;line-height:1.25;background:#ffffff12;box-shadow:none;color:var(--mu);border-radius:14px}
 .tabs button{position:relative;z-index:1}
 .tabs button.on{background:transparent;color:#241a00}
 .tabpill{position:absolute;top:6px;bottom:6px;left:0;width:0;border-radius:14px;background:linear-gradient(135deg,var(--gd),#ffb300);transition:left .32s cubic-bezier(.3,.8,.3,1),width .32s cubic-bezier(.3,.8,.3,1);z-index:0;pointer-events:none}
@@ -74,7 +74,7 @@ button.s{padding:5px 11px;font-size:.85rem;border-radius:99px}
 #ls .lsw{display:flex;align-items:center;justify-content:center;opacity:.8}
 </style></head><body><main>
 <div class="hero"><div class="lg">🏸</div><div><h1>ASMR <b>Badminton</b></h1><div class="mu" id="role">Memuat…</div></div></div><div id="lg" style="margin:6px 0"></div>
-<div class="tabs"><i class="tabpill"></i><button data-t="j" class="on">📅 Jadwal</button><button data-t="k">🏆 Klasemen</button><button data-t="r">🎰 Roulette</button><button data-t="c">💰 Kas</button><button data-t="p">👥 Pemain</button></div>
+<div class="tabs"><i class="tabpill"></i><button data-t="j" class="on">📅<br>Jadwal</button><button data-t="k">🏆<br>Klasemen</button><button data-t="h">🏅<br>Predikat</button><button data-t="r">🎰<br>Roulette</button><button data-t="c">💰<br>Kas</button><button data-t="p">👥<br>Pemain</button></div>
 <div id="v"><p class="mu">Memuat…</p></div>
 </main><div id="ls"></div>
 <script type="module">
@@ -143,9 +143,9 @@ function mt(m){
 function klas(){
   const s=curS(),st={};
   P.forEach(p=>st[p.name]={n:p.name,g:0,w:0,p:0});
-  M.forEach(m=>{if(m.st!=='done'||m.sa==null||m.sb==null)return;[[m.a,m.sa,m.sb,'a'],[m.b,m.sb,m.sa,'b']].forEach(([t,x,y,z])=>t.forEach(n=>{const o=st[n]||(st[n]={n,g:0,w:0,p:0});o.g++;o.p+=x;if(won(m,z,x,y))o.w++}))});
-  const rows=Object.values(st).sort((a,b)=>b.p-a.p||b.w-a.w||b.g-a.g||a.n.localeCompare(b.n));
-  let h=podium(rows)+`<div class="card"><b>Klasemen</b><div class="x"><table><tr><th>#</th><th>Nama</th><th>Main</th><th>Menang</th><th>Poin</th></tr>${rows.map((o,i)=>`<tr class="${o.g&&i<3?'t'+(i+1):''}"><td>${o.g?(['🏆','🥈','🥉'][i]||i+1):i+1}</td><td class="${i===0&&o.g?'w':''}">${esc(o.n)} ${LV(o.n)}${i===0&&o.g?' 🔥':''}</td><td>${o.g}</td><td>${o.w}</td><td><b>${o.p}</b></td></tr>`).join('')||'<tr><td colspan=5 class="mu">Belum ada data.</td></tr>'}</table></div><div class="mu">Poin = total skor tim yang dicetak di semua pertandingan selesai.</div></div>`;
+  kM(s).forEach(m=>{if(m.st!=='done'||m.sa==null||m.sb==null)return;[[m.a,m.sa,m.sb,'a'],[m.b,m.sb,m.sa,'b']].forEach(([t,x,y,z])=>t.forEach(n=>{const o=st[n]||(st[n]={n,g:0,w:0,p:0});o.g++;o.p+=x;if(won(m,z,x,y))o.w++}))});
+  const rows=Object.values(st).filter(o=>kmode==='all'||o.g>0).sort((a,b)=>b.p-a.p||b.w-a.w||b.g-a.g||a.n.localeCompare(b.n));
+  let h=kchips(s)+podium(rows)+`<div class="card"><b>Klasemen</b><div class="x"><table><tr><th>#</th><th>Nama</th><th>Main</th><th>Menang</th><th>Poin</th></tr>${rows.map((o,i)=>`<tr class="${o.g&&i<3?'t'+(i+1):''}"><td>${o.g?(['🏆','🥈','🥉'][i]||i+1):i+1}</td><td class="${i===0&&o.g?'w':''}">${esc(o.n)} ${LV(o.n)}${i===0&&o.g?' 🔥':''}</td><td>${o.g}</td><td>${o.w}</td><td><b>${o.p}</b></td></tr>`).join('')||'<tr><td colspan=5 class="mu">Belum ada data.</td></tr>'}</table></div><div class="mu">Poin = total skor tim yang dicetak di semua pertandingan selesai.</div></div>`;
   if(!s)return h+'<p class="mu">Belum ada jadwal.</p>';
   const ms=M.filter(m=>m.sid===s.id).sort((a,b)=>a.at-b.at),by=k=>ms.filter(m=>m.st===k).map(mt).join('');
   h+=`<div class="card"><label>Sesi untuk pertandingan</label><select id="sel">${S.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<option value="${x.id}" ${x.id===s.id?'selected':''}>${esc(fd(x.date))}${x.venue?' · '+esc(x.venue):''}</option>`).join('')}</select>${adm?`<label>Jumlah lapangan</label>${I('ct','','number',1)}<button data-gen="${s.id}">🎲 Acak pasangan seimbang</button> <button class="o" data-em="new">➕ Pasangan request (manual)</button>`:''}</div>`;
@@ -311,18 +311,54 @@ function closeLs(){
   render();
 }
 const podium=rows=>{const t=rows.filter(o=>o.g>0).slice(0,3);if(!t.length)return '';const em=['🏆','🥈','🥉'],ord=t.length>=3?[1,0,2]:t.map((_,i)=>i);return `<div class="pod">${ord.map(i=>`<div class="p${i+1}"><div class="em">${em[i]}</div><div class="nm">${esc(t[i].n)}</div><div class="pt">${t[i].p}</div><div class="mu">${t[i].w}/${t[i].g} menang</div></div>`).join('')}</div>`};
-const TABS=['j','k','r','c','p'],RM=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+const TABS=['j','k','h','r','c','p'],RM=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
 let tabDir=1,animTab=false,animT=null;
 function movePill(){const b=document.querySelector('.tabs button.on'),p=document.querySelector('.tabpill');if(b&&p){p.style.left=b.offsetLeft+'px';p.style.width=b.offsetWidth+'px'}}
 window.addEventListener('resize',movePill);setTimeout(movePill,0);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(movePill);
 function countUp(){document.querySelectorAll('.cnt').forEach(el=>{const n=+el.dataset.n,t0=performance.now(),st=t=>{const k=Math.min(1,(t-t0)/700);el.textContent=rs(n*(1-Math.pow(1-k,3)));if(k<1&&el.isConnected)requestAnimationFrame(st)};requestAnimationFrame(st)})}
+/*PRED*/
+let kmode='all';
+const kM=s=>kmode==='all'||!s?M:M.filter(m=>{const x=S.find(q=>q.id===m.sid);return x&&(kmode==='week'?x.id===s.id:x.date.slice(0,7)===s.date.slice(0,7))});
+const kchips=s=>`<div class="tb" style="margin:6px 0">${[['all','Keseluruhan'],['week','Mingguan'],['month','Bulanan']].map(k=>`<button class="s ${kmode===k[0]?'':'o'}" data-km="${k[0]}">${k[1]}</button>`).join('')}</div>${kmode!=='all'&&s?`<div class="mu" style="margin-bottom:6px">${kmode==='week'?'Sesi: '+esc(fd(s.date)):'Bulan: '+esc(new Date(s.date+'T00:00').toLocaleDateString('id-ID',{month:'long',year:'numeric'}))} · ganti lewat pilihan sesi di bawah tabel</div>`:''}`;
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0,pc=v=>Math.round(v*100);
+function stRows(ms){
+  const st={};
+  ms.forEach(m=>{if(m.st!=='done'||m.sa==null||m.sb==null)return;[[m.a,m.sa,m.sb,'a'],[m.b,m.sb,m.sa,'b']].forEach(([t,x,y,z])=>t.forEach(n=>{const o=st[n]||(st[n]={n,g:0,w:0,p:0});o.g++;o.p+=x;if(won(m,z,x,y))o.w++}))});
+  return Object.values(st).sort((a,b)=>b.p-a.p||b.w-a.w||a.n.localeCompare(b.n));
+}
+function hist(){
+  return S.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(s=>({s,rows:stRows(M.filter(m=>m.sid===s.id))})).filter(h=>h.rows.length).map(h=>{
+    let rk=0;h.rows.forEach((r,i)=>{rk=i>0&&h.rows[i-1].p===r.p&&h.rows[i-1].w===r.w?rk:i+1;r.rk=rk});
+    h.mx=Math.max(...h.rows.map(r=>r.rk));return h;
+  });
+}
+function predikat(){
+  const H=hist(),pl={},ns=H.length;
+  H.forEach(h=>{const n=h.rows.length;h.rows.forEach(r=>{const o=pl[r.n]||(pl[r.n]={n:r.n,ses:0,t1:0,last:0,w:0,g:0,wr:[]});o.ses++;o.w+=r.w;o.g+=r.g;o.wr.push(r.w/r.g);if(r.rk===1&&n>=2)o.t1++;if(n>=3&&h.mx>1&&r.rk===h.mx)o.last++})});
+  const A=Object.values(pl),maxSes=Math.max(0,...A.map(o=>o.ses));
+  const top=(arr,f)=>arr.slice(0,3).map((o,i)=>`<div class="${i?'mu':'w'}">${['🥇','🥈','🥉'][i]} ${esc(o.n)} · ${f(o)}</div>`).join('')||'<div class="mu">Belum ada.</div>';
+  const card=(ic,tt,ds,body)=>`<div class="card"><div style="display:flex;gap:12px;align-items:center"><div style="font-size:2.3rem">${ic}</div><div><b>${tt}</b><div class="mu">${ds}</div></div></div><div style="margin-top:8px">${body}</div></div>`;
+  const lock=(need,have)=>`<div class="mu">🔒 Terbuka setelah ${need} sesi bermain (baru ${have}).</div>`;
+  const goat=A.filter(o=>o.t1>0).sort((a,b)=>b.t1-a.t1||b.w-a.w||(b.w/b.g)-(a.w/a.g));
+  const tr=A.filter(o=>o.ses>=4).map(o=>{const k=Math.floor(o.ses/2),e=avg(o.wr.slice(0,k)),l=avg(o.wr.slice(o.ses-k));return Object.assign({},o,{e,l,d:l-e})});
+  const up=tr.filter(o=>o.d>0).sort((a,b)=>b.d-a.d),down=tr.filter(o=>o.d<0).sort((a,b)=>a.d-b.d);
+  const sial=A.filter(o=>o.last>0).sort((a,b)=>b.last-a.last||(a.w/a.g)-(b.w/b.g));
+  const tf=o=>pc(o.e)+'% → '+pc(o.l)+'% menang';
+  const rows=H.slice().reverse().map(h=>`<tr><td>${esc(sdt(h.s.date))}</td><td>🥇 ${h.rows.filter(r=>r.rk===1).map(r=>esc(r.n)).join(', ')}</td><td>${h.rows.length}</td><td>${h.rows.length>=3&&h.mx>1?'😅 '+h.rows.filter(r=>r.rk===h.mx).map(r=>esc(r.n)).join(', '):'-'}</td></tr>`).join('');
+  return card('🐐','GOAT','Paling banyak juara klasemen mingguan',ns<3?lock(3,ns):top(goat,o=>o.t1+'× juara · '+o.w+' menang'))
+   +card('📈','Paling Berkembang','Persentase menang naik paling tinggi (paruh akhir vs awal)',maxSes<4?lock(4,maxSes):top(up,tf))
+   +card('📉','Dalam Penurunan','Persentase menang turun paling dalam',maxSes<4?lock(4,maxSes):top(down,tf))
+   +card('😅','Pemain Tersial','Paling sering di dasar klasemen mingguan',ns<3?lock(3,ns):top(sial,o=>o.last+'× di dasar'))
+   +`<div class="card"><b>Riwayat klasemen mingguan</b><div class="x"><table><tr><th>Tanggal</th><th>Juara</th><th>Pemain</th><th>Dasar</th></tr>${rows||'<tr><td colspan=4 class="mu">Belum ada pertandingan selesai.</td></tr>'}</table></div><div class="mu" style="margin-top:8px">Dihitung otomatis dari hasil tiap sesi. Peringkat mingguan memakai aturan klasemen (poin, lalu menang). Perubahan atau penghapusan sesi ikut mengubah riwayat.</div></div>`;
+}
+/*ENDPRED*/
 function render(){
   if(lsId)lsRender();if(spinning){pend=true;return}const a=document.activeElement;if(a&&a.dataset&&a.dataset.d){pend=true;return}
   $('#role').textContent=db?(adm?'Mode admin — bisa input & edit':'Mode lihat saja'):'Memuat…';
   if(db){
     const v=$('#v'),go=animTab&&!RM;animTab=false;
     v.classList.remove('go');
-    v.innerHTML=waCard()+({j:jadwal,k:klas,r:roul,c:kas,p:players})[tab]();
+    v.innerHTML=waCard()+({j:jadwal,k:klas,h:predikat,r:roul,c:kas,p:players})[tab]();
     if(go){[...v.children].forEach((c,i)=>c.style.setProperty('--i',Math.min(i,9)));v.style.setProperty('--dx',(tabDir>0?28:-28)+'px');void v.offsetWidth;v.classList.add('go');clearTimeout(animT);animT=setTimeout(()=>v.classList.remove('go'),1100);if(tab==='c')countUp()}
   }
 }
@@ -374,13 +410,14 @@ async function csv(kind){
 }
 $('#v').onclick=async e=>{
   const b=e.target.closest('button'),c=e.target.closest('input[data-lu]');
-  if(!adm&&!(b&&(b.dataset.csv||b.dataset.live)))return;
+  if(!adm&&!(b&&(b.dataset.csv||b.dataset.live||b.dataset.km)))return;
   const ds=(b||c||{}).dataset||{},sOf=id=>S.find(x=>x.id===id);
   try{
     if(c){const s=sOf(ds.lu),l=(s.lunas||[]).filter(x=>x!==ds.n);if(c.checked)l.push(ds.n);await db.doc('sessions/'+s.id).update({lunas:l})}
     else if(!b)return;
     else if(ds.csv)csv(ds.csv);
     else if(ds.live)await openLs(ds.live);
+    else if(ds.km){kmode=ds.km;render()}
     else if(ds.wa){const s=sOf(ds.wa);wa={title:ds.k==='a'?'Absensi kehadiran':'Klasemen & keuangan',t:waText(s,ds.k)};render();scrollTo({top:0,behavior:'smooth'})}
     else if(ds.cpy)copyWa();
     else if(ds.wx){wa=null;render()}
