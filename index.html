@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><title>ASMR Badminton</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#07120d;--bg2:#12372a;--cd:#0f2219;--cd2:#16352a;--tx:#eef6f0;--mu:#8fa89a;--gd:#ffd54a;--bd:#ffffff1f;--dn:#ff8a65;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:radial-gradient(120% 90% at 50% -10%,var(--bg2),var(--bg) 62%) fixed;color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+main{max-width:680px;margin:0 auto;padding:12px 14px 48px}
+.hero{display:flex;align-items:center;gap:12px;margin:4px 0}.hero .lg{font-size:2.3rem;filter:drop-shadow(0 0 14px #ffd54a99)}
+h1{font-size:1.55rem;margin:0}h1 b{color:var(--gd)}#role{display:inline-block;background:#ffffff14;border-radius:99px;padding:1px 10px}
+.mu{color:var(--mu);font-size:.9rem}
+.card{background:linear-gradient(160deg,var(--cd2),var(--cd));border:1px solid var(--bd);border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 6px 20px #0006}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:12px;background:#00000045;color:var(--tx);font:inherit;margin:4px 0 8px}
+label{font-size:.85rem;color:var(--mu)}
+button{font:inherit;font-weight:600;padding:10px 16px;border-radius:12px;border:0;background:linear-gradient(135deg,#27b273,#1a8a58);color:#fff;cursor:pointer;box-shadow:0 3px 10px #0005;transition:transform .1s}
+button:active{transform:scale(.95)}
+button.o{background:transparent;border:1px solid #ffffff33;box-shadow:none}
+button.d{background:transparent;border:1px solid var(--dn);color:var(--dn);box-shadow:none}
+button.s{padding:5px 11px;font-size:.85rem;border-radius:99px}
+.tabs{display:flex;gap:6px;margin:8px 0;position:sticky;top:0;z-index:5;padding:6px 0;background:#07120de6;backdrop-filter:blur(8px)}
+.tabs button{flex:1;padding:9px 2px;font-size:.8rem;background:#ffffff12;box-shadow:none;color:var(--mu);border-radius:14px}
+.tabs button.on{background:linear-gradient(135deg,var(--gd),#ffb300);color:#241a00}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--bd)}
+.pill{background:#ffd54a26;color:var(--gd);border-radius:99px;padding:2px 11px;font-size:.85rem;font-weight:700}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.x{overflow-x:auto}table{width:100%;border-collapse:collapse}td,th{padding:8px 6px;border-top:1px solid var(--bd);text-align:left}th{color:var(--mu);font-weight:500;font-size:.8rem}
+.t1 td{background:#ffd54a22}.t2 td{background:#ffffff10}.t3 td{background:#cd7f3218}
+.mt{background:#00000030;border:1px solid var(--bd);border-radius:14px;padding:12px;margin-top:10px}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:8px 0}.vs.st{grid-template-columns:1fr}.vsc{text-align:center;font-size:1.35rem}
+.sc{width:64px;text-align:center;display:inline-block;margin:0 4px}
+.w{color:var(--gd);font-weight:700}.tb{display:flex;gap:8px;flex-wrap:wrap}h3{margin:18px 0 0;font-size:.9rem;color:var(--mu);letter-spacing:.1em}
+.live{display:inline-block;background:#e53935;color:#fff;border-radius:99px;padding:1px 9px;font-size:.72rem;font-weight:800;animation:lv 1.4s infinite}@keyframes lv{50%{opacity:.45}}
+.bar{height:8px;background:#ffffff1a;border-radius:9px;overflow:hidden;margin:10px 0 2px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#27b273,var(--gd));transition:width .5s}
+.pod{display:flex;gap:8px;align-items:flex-end;margin:12px 0}.pod>div{flex:1;min-width:0;border-radius:16px 16px 10px 10px;padding:12px 6px;text-align:center;background:linear-gradient(180deg,#ffffff1f,#ffffff08)}
+.pod .p1{background:linear-gradient(180deg,#ffd54a,#c99700);color:#241a00;padding:20px 6px}.pod .p1 .mu{color:#241a00aa}.pod .em{font-size:1.9rem}.pod .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pod .pt{font-size:1.5rem;font-weight:900}
+#ls button{box-shadow:none}#ls .lsb:disabled{opacity:.4}
+#ls{display:none;position:fixed;inset:0;z-index:99;background:radial-gradient(120% 120% at 50% 0%,#12372a,#07120d);color:#fff;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#ls .lsg{height:100%;display:grid;grid-template-rows:auto 1fr;gap:8px;padding:8px;position:relative}
+#ls .lsbar{display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap}
+#ls .lsb{background:#ffffff1f;border:1px solid #ffffff33;color:#fff;border-radius:12px;padding:8px 12px;font-size:clamp(12px,2.6vh,16px)}
+#ls .lsb.big{background:#ffd54a;color:#201800;border-color:#ffd54a;font-weight:700;font-size:1.1rem;padding:12px 20px}
+#ls .lsti{font-weight:700;opacity:.8;margin:0 6px}#ls .lsrot{display:none;font-size:.8rem;color:#ffd54a}
+#ls .lsm{display:grid;grid-template-columns:1fr minmax(110px,20%) 1fr;gap:8px;min-height:0}
+@media (orientation:portrait){#ls .lsrot{display:inline}#ls .lsm{grid-template-columns:1fr;grid-template-rows:1fr auto 1fr}}
+#ls .lsp{background:linear-gradient(160deg,var(--tc),#0b1a13 78%);border-radius:20px;padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0}
+#ls .lsp.on{box-shadow:0 0 0 4px #ffd54a,0 0 30px #ffd54a66;animation:lsp 1.6s ease-in-out infinite}
+@keyframes lsp{50%{box-shadow:0 0 0 4px #ffd54a,0 0 50px #ffd54acc}}
+#ls .lst{font-weight:800;letter-spacing:.12em;opacity:.85;font-size:clamp(11px,2.4vh,15px)}
+#ls .lss{background:#00000040;border-radius:14px;padding:6px 10px;display:flex;align-items:center;gap:8px;border:2px solid transparent}
+#ls .lss.sv{background:#ffd54a;color:#221a00;border-color:#fff}#ls .lss.rc{border-color:#7fd1ff;background:#7fd1ff22}
+#ls .lsl{font-size:clamp(9px,1.9vh,12px);font-weight:800;letter-spacing:.1em;opacity:.7;min-width:3.4em}
+#ls .lsn{flex:1;font-weight:700;font-size:clamp(16px,min(5.2vh,4.2vw),36px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ls .lsbd{font-size:clamp(10px,2.2vh,14px);font-weight:800;background:#00000030;border-radius:99px;padding:2px 8px}#ls .lsbd.r{background:#7fd1ff33;color:#bfe9ff}
+#ls .lsc{flex:1;min-height:0;border:0;background:transparent;color:#fff;font-weight:900;line-height:1;font-size:clamp(60px,min(34vh,26vw),260px);font-variant-numeric:tabular-nums;border-radius:16px}
+#ls .lsc:active:not(:disabled){transform:scale(.96);background:#ffffff14}#ls .lsc:disabled{color:#fff}#ls .lsc.bump{animation:lsb .35s}
+@keyframes lsb{40%{transform:scale(1.18)}}
+#ls .lsmid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;overflow:hidden}
+#ls .lsset{font-weight:900;font-size:clamp(16px,4.2vh,28px);letter-spacing:.1em}
+#ls .lsdots{display:flex;align-items:center;gap:5px}#ls .lsdots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--c)}#ls .lsdots i.f{background:var(--c)}
+#ls .lshist{font-size:clamp(11px,2.6vh,16px);opacity:.85}#ls .lsinfo{font-size:clamp(12px,2.8vh,18px)}#ls .lsinfo small{display:block;opacity:.7;font-size:.75em}
+#ls .lsmsg{position:absolute;left:50%;top:56px;transform:translateX(-50%);background:#ffd54a;color:#221a00;font-weight:800;padding:8px 16px;border-radius:99px;font-size:clamp(13px,3vh,20px);z-index:2}
+#ls .lsov{position:absolute;inset:0;background:#000000c0;display:flex;align-items:center;justify-content:center;z-index:3;text-align:center}
+#ls .lsbox{padding:20px;display:flex;flex-direction:column;gap:12px}#ls .lswn{font-size:clamp(22px,7vh,48px);font-weight:900}
+#ls .lsw{display:flex;align-items:center;justify-content:center;opacity:.8}
+</style></head><body><main>
+<div class="hero"><div class="lg">🏸</div><div><h1>ASMR <b>Badminton</b></h1><div class="mu" id="role">Memuat…</div></div></div><div id="lg" style="margin:6px 0"></div>
+<div class="tabs"><button data-t="j" class="on">📅 Jadwal</button><button data-t="k">🏆 Klasemen</button><button data-t="r">🎰 Roulette</button><button data-t="c">💰 Kas</button><button data-t="p">👥 Pemain</button></div>
+<div id="v"><p class="mu">Memuat…</p></div>
+</main><div id="ls"></div>
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import {getFirestore,collection,doc,onSnapshot,addDoc,setDoc,updateDoc,deleteDoc} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import {getAuth,onAuthStateChanged,signInWithPopup,GoogleAuthProvider,signOut} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+
+// ======== ISI BAGIAN INI (lihat PANDUAN.md) ========
+const firebaseConfig={
+  apiKey:"AIzaSyCiG_52vKSIg-W0-YCZZrOd60rAOYY_LLw",
+  authDomain:"asmr-badminton.firebaseapp.com",
+  projectId:"asmr-badminton",
+  storageBucket:"asmr-badminton.firebasestorage.app",
+  messagingSenderId:"758256730001",
+  appId:"1:758256730001:web:95d1ff13ce7e78e2496430"
+};
+const ADMINS=['nizaalfaadhilah@gmail.com'];   // email Google admin (huruf kecil)
+// ===================================================
+
+const $=s=>document.querySelector(s);
+let S=[],P=[],M=[],L=[],db=null,adm=false,tab='j',armed='',editId='',selS='',fo=false,pend=false,D={},wa=null,cp=null,rot=0,spinning=false,rmode='main',lw='',em='',lsId='',lsBusy=false,lsPrev=null,lsWake=null,lsSig='';
+const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rp=n=>'Rp'+Math.round(Number(n)||0).toLocaleString('id-ID');
+const fd=d=>{try{return new Date(d+'T00:00').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch(e){return d}};
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const cu=n=>Math.ceil(n/500)*500;
+const g=(k,d)=>D[k]!==undefined?D[k]:d;
+const I=(k,ph,t,d)=>`<input data-d="${k}" type="${t||'text'}" placeholder="${esc(ph||'')}" value="${esc(g(k,d==null?'':d))}">`;
+const nm=m=>m.a.concat(m.b);
+const sh=a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+function curS(){
+  const f=S.find(x=>x.id===selS);if(f)return f;
+  const t=today(),a=S.slice().sort((x,y)=>y.date.localeCompare(x.date));
+  return a.find(x=>x.date<=t)||a[a.length-1]||null;
+}
+function card(s){
+  const h=s.hadir||[],l=s.lunas||[],ex=s.exp||[];
+  const tot=ex.reduce((a,e)=>a+(+e.a||0),0),per=fee(s),k=kasOf(s);
+  return `<div class="card"><div class="row" style="border:0;padding:0"><b>${esc(fd(s.date))}</b><span class="pill">${h.length} hadir</span></div>
+<div class="mu">${esc(s.time||'')} · ${esc(s.venue||'Lokasi belum diisi')}${s.note?'<br>'+esc(s.note):''}</div>
+<div class="bar"><i style="width:${h.length?Math.round(k.l/h.length*100):0}%"></i></div><div class="mu">${k.l}/${h.length} sudah lunas</div><div style="margin-top:10px"><b>Biaya pengeluaran</b>${ex.map((e,i)=>`<div class="row"><span>${esc(e.n)}</span><span>${rp(e.a)}${adm?` <button class="s d o" data-rx="${s.id}" data-i="${i}">✕</button>`:''}</span></div>`).join('')||'<div class="mu">Belum ada biaya.</div>'}
+${adm?`<div class="g2" style="margin-top:6px">${I('en'+s.id,'Nama biaya, mis. sewa lapangan')}${I('ea'+s.id,'Jumlah Rp','number')}</div><button class="s o" data-ax="${s.id}">+ Tambah biaya</button>`:''}
+<div class="row"><b>Total biaya</b><b>${rp(tot)}</b></div>
+<div class="row"><b>Iuran per orang</b><b>${per?rp(per):'—'}</b></div><div class="mu">${s.iuran>0?'Nominal diatur manual.':'Otomatis: total ÷ jumlah hadir, dibulatkan ke atas Rp500.'}</div>
+${adm?`<div class="g2" style="margin-top:6px">${I('ip'+s.id,'Nominal iuran/orang (kosong = otomatis)','number',s.iuran||'')}<button class="s o" data-fee="${s.id}">Simpan iuran</button></div>`:''}
+<div class="row"><span>Iuran terkumpul (${k.l} lunas)</span><span>${rp(k.coll)}</span></div>
+<div class="row"><b>Tambahan kas minggu ini</b><b class="${k.kas>=0?'w':''}">${rs(k.kas)}</b></div>${k.n&&k.kpot!==k.kas?`<div class="mu">Jika semua yang hadir sudah lunas: ${rs(k.kpot)}</div>`:''}</div>
+<div style="margin-top:10px"><b>Kehadiran &amp; iuran</b>
+${adm?`<div class="tb" style="margin:6px 0">${P.map(p=>`<button class="s ${h.includes(p.name)?'':'o'}" data-att="${s.id}" data-n="${esc(p.name)}">${esc(p.name)} ${LV(p.name)}</button>`).join('')||'<span class="mu">Tambah pemain dulu di tab Pemain.</span>'}</div><div class="mu">Tap nama untuk menandai hadir.</div>`:''}
+${h.map(n=>`<div class="row"><span>${esc(n)}</span>${adm?`<label><input type="checkbox" data-lu="${s.id}" data-n="${esc(n)}" ${l.includes(n)?'checked':''} style="width:auto;margin:0 4px 0 0">lunas</label>`:`<span class="${l.includes(n)?'w':'mu'}">${l.includes(n)?'✓ lunas':'belum bayar'}</span>`}</div>`).join('')||'<div class="mu">Belum ada yang hadir.</div>'}</div>
+${adm?`<div class="tb" style="margin-top:10px"><button class="o s" data-edit="${s.id}">Edit jadwal</button><button class="o s" data-cp="${s.id}">Salin ke minggu depan</button><button class="o s" data-wa="${s.id}" data-k="a">📋 WA absensi</button><button class="o s" data-wa="${s.id}" data-k="h">📋 WA hasil</button><button class="d s" data-del="${s.id}" style="margin-left:auto">${armed===s.id?'Yakin hapus?':'Hapus jadwal'}</button></div>`:''}</div>`;
+}
+function jadwal(){
+  const t=today(),up=S.filter(s=>s.date>=t).sort((a,b)=>a.date.localeCompare(b.date)),pa=S.filter(s=>s.date<t).sort((a,b)=>b.date.localeCompare(a.date));
+  const f=adm?(fo||editId?`<div class="card"><b>${editId?'Edit jadwal':(cp?'Jadwal baru (salinan sesi '+fd(cp.date)+')':'Jadwal baru')}</b><div class="g2"><div><label>Tanggal</label>${I('fd','','date',today())}</div><div><label>Jam</label>${I('ft','','time','19:00')}</div></div><label>Lokasi / GOR</label>${I('fv','mis. GOR Ken Arok')}<label>Catatan (opsional)</label>${I('fn')}<div class="tb"><button data-fs="1">${editId?'Simpan perubahan':'Simpan jadwal'}</button><button class="o" data-fx="1">Batal</button></div></div>`:'<div class="tb"><button data-fo="1">+ Buat jadwal mabar</button><button class="o" data-cp="last">📄 Salin sesi terakhir</button></div>'):'';
+  return f+(up.length?'<h3>AKAN DATANG</h3>'+up.map(card).join(''):'')+(pa.length?'<h3>RIWAYAT</h3>'+pa.map(card).join(''):'')+(S.length?'':'<p class="mu">Belum ada jadwal.</p>');
+}
+function mt(m){
+  if(adm&&em===m.id)return `<div class="mt"><div class="mu">Ronde ${m.rnd||1} · ubah pasangan</div>${ed(m.id,curS())}</div>`;
+  const k=m.id,dv=(p,v)=>g(p+k,v==null?'':v),w=m.st==='done'?(m.gw?(m.gw[0]>m.gw[1]?1:2):(m.sa>m.sb?1:m.sb>m.sa?2:0)):0,ed2=adm&&m.st!=='next',ed=ed2&&!m.ls;
+  const sc=ed?`<input class="sc" type="number" min="0" data-d="a${k}" value="${esc(dv('a',m.sa))}">–<input class="sc" type="number" min="0" data-d="b${k}" value="${esc(dv('b',m.sb))}">`:(m.st==='done'?`<b>${m.gw?m.gw[0]+' – '+m.gw[1]+' set':m.sa+' – '+m.sb}</b>${m.gs?`<div class="mu">${m.gs.map(x=>x[0]+'-'+x[1]).join(' · ')}</div>`:''}`:(m.ls?`<b>${m.ls.over?'Hasil akhir':'Set '+(m.ls.gm.length+1)} · ${m.ls.ga} – ${m.ls.gb}</b>${m.ls.gm.length?`<div class="mu">${m.ls.gm.map(x=>x[0]+'-'+x[1]).join(' · ')}</div>`:''}`:'<span class="mu">vs</span>'));
+  const ref=ed2?`<input data-d="n${k}" placeholder="Refleksi: apa yang bagus / perlu diperbaiki?" maxlength="300" value="${esc(dv('n',m.note))}">`:(m.note?`<div class="mu">💭 ${esc(m.note)}</div>`:'');
+  const bt=adm?`<div class="tb">${m.st==='next'?`<button class="s" data-go="${k}">Mulai main</button>`:(m.st==='main'&&m.ls?'':`<button class="s" data-sv="${k}">${m.st==='main'?'Selesai &amp; simpan skor':'Simpan perubahan'}</button>`)}${m.st!=='done'?`<button class="s o" data-em="${k}">✏️ Ubah pasangan</button>`:''}<button class="s d o" data-rmm="${k}">Hapus</button></div>`:'';
+  return `<div class="mt"><div class="mu">${m.st==='main'?'<span class="live">● LIVE</span> ':''}Ronde ${m.rnd||1}${m.rest&&m.rest.length?' · istirahat: '+esc(m.rest.join(', ')):''} · ${bal(m)}</div><div class="vs${ed?' st':''}"><div class="${w===1?'w':''}">${tm(m.a)}</div><div class="vsc">${sc}</div><div class="${w===2?'w':''}" style="${ed?'':'text-align:right'}">${tm(m.b)}</div></div>${ref}${(adm&&m.st!=='done')||m.st==='main'?`<div class="tb" style="margin:6px 0"><button class="s" data-live="${k}">${adm?'📺 Live score':'👀 Tonton live'}</button></div>`:''}${bt}</div>`;
+}
+function klas(){
+  const s=curS(),st={};
+  P.forEach(p=>st[p.name]={n:p.name,g:0,w:0,p:0});
+  M.forEach(m=>{if(m.st!=='done'||m.sa==null||m.sb==null)return;[[m.a,m.sa,m.sb,'a'],[m.b,m.sb,m.sa,'b']].forEach(([t,x,y,z])=>t.forEach(n=>{const o=st[n]||(st[n]={n,g:0,w:0,p:0});o.g++;o.p+=x;if(won(m,z,x,y))o.w++}))});
+  const rows=Object.values(st).sort((a,b)=>b.p-a.p||b.w-a.w||b.g-a.g||a.n.localeCompare(b.n));
+  let h=podium(rows)+`<div class="card"><b>Klasemen</b><div class="x"><table><tr><th>#</th><th>Nama</th><th>Main</th><th>Menang</th><th>Poin</th></tr>${rows.map((o,i)=>`<tr class="${o.g&&i<3?'t'+(i+1):''}"><td>${o.g?(['🏆','🥈','🥉'][i]||i+1):i+1}</td><td class="${i===0&&o.g?'w':''}">${esc(o.n)} ${LV(o.n)}${i===0&&o.g?' 🔥':''}</td><td>${o.g}</td><td>${o.w}</td><td><b>${o.p}</b></td></tr>`).join('')||'<tr><td colspan=5 class="mu">Belum ada data.</td></tr>'}</table></div><div class="mu">Poin = total skor tim yang dicetak di semua pertandingan selesai.</div></div>`;
+  if(!s)return h+'<p class="mu">Belum ada jadwal.</p>';
+  const ms=M.filter(m=>m.sid===s.id).sort((a,b)=>a.at-b.at),by=k=>ms.filter(m=>m.st===k).map(mt).join('');
+  h+=`<div class="card"><label>Sesi untuk pertandingan</label><select id="sel">${S.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<option value="${x.id}" ${x.id===s.id?'selected':''}>${esc(fd(x.date))}${x.venue?' · '+esc(x.venue):''}</option>`).join('')}</select>${adm?`<label>Jumlah lapangan</label>${I('ct','','number',1)}<button data-gen="${s.id}">🎲 Acak pasangan seimbang</button> <button class="o" data-em="new">➕ Pasangan request (manual)</button>`:''}</div>`;
+  return h+`${em==='new'&&adm?`<div class="card"><b>Pasangan request</b>${ed('new',s)}</div>`:''}<div class="card"><b>🔴 Sedang berlangsung</b>${by('main')||'<div class="mu">Tidak ada pertandingan berlangsung.</div>'}</div><div class="card"><b>🎲 Rekomendasi pasangan berikutnya</b>${by('next')||'<div class="mu">Belum ada rekomendasi.</div>'}</div><div class="card"><b>✅ Selesai</b>${by('done')||'<div class="mu">Belum ada pertandingan selesai.</div>'}</div>`;
+}
+function players(){
+  const c={};S.forEach(s=>(s.hadir||[]).forEach(n=>c[n]=(c[n]||0)+1));
+  return `<div class="card"><b>Daftar pemain (${P.length})</b>${adm?`<div style="margin-top:6px">${I('pn','Nama; pisahkan koma untuk banyak sekaligus')}<label>Level pemain (berlaku untuk semua nama di atas)</label><select data-d="plv">${[1,2,3].map(k=>`<option value="${k}" ${+g('plv',2)===k?'selected':''}>${LVE[k]} ${LVN[k]}</option>`).join('')}</select><button data-ap="1">Tambah pemain</button></div>`:''}${P.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(p=>`<div class="row"><span>${esc(p.name)}</span><span class="mu">${c[p.name]||0}× hadir ${adm?`<select data-pl="${p.id}" style="width:auto;margin:0 4px">${[1,2,3].map(k=>`<option value="${k}" ${lvOf(p.name)===k?'selected':''}>${LVE[k]} ${LVN[k]}</option>`).join('')}</select><button class="s d o" data-rp="${p.id}">✕</button>`:' · '+LV(p.name)+' '+(LVN[lvOf(p.name)]||'')}</span></div>`).join('')||'<div class="mu">Belum ada pemain.</div>'}</div><div class="card"><b>Unduh data (CSV)</b><div class="tb" style="margin-top:8px"><button class="o" data-csv="h">Kehadiran &amp; iuran</button><button class="o" data-csv="m">Pertandingan</button></div></div>`;
+}
+const NL=String.fromCharCode(10);
+const add7=d=>{const x=new Date(d+'T00:00');x.setDate(x.getDate()+7);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
+const selH=s=>`<select id="sel">${S.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<option value="${x.id}" ${x.id===s.id?'selected':''}>${esc(fd(x.date))}${x.venue?' · '+esc(x.venue):''}</option>`).join('')}</select>`;
+const waCard=()=>wa?`<div class="card"><b>${esc(wa.title)}</b><textarea id="wat" readonly rows="12">${esc(wa.t)}</textarea><div class="tb"><button data-cpy="1">Salin</button><button class="o" data-wx="1">Tutup</button></div></div>`:'';
+function waText(s,k){
+  const h=s.hadir||[],l=s.lunas||[],ex=s.exp||[],tot=ex.reduce((a,e)=>a+(+e.a||0),0);
+  const hd=['🏸 *ASMR Badminton*','📅 '+fd(s.date),'⏰ '+(s.time||'-')+' · 📍 '+(s.venue||'-')].concat(s.note?['📝 '+s.note]:[]);
+  if(k==='a'){const bel=P.map(p=>p.name).filter(n=>!h.includes(n));return hd.concat(['','✅ *Hadir ('+h.length+')*'],h.length?h.map((n,i)=>(i+1)+'. '+n):['-'],bel.length?['','❔ *Belum konfirmasi ('+bel.length+')*'].concat(bel.map(n=>'- '+n)):[],['','Kabari admin kalau berhalangan hadir 🙏']).join(NL)}
+  const st={};
+  M.filter(m=>m.sid===s.id&&m.st==='done'&&m.sa!=null&&m.sb!=null).forEach(m=>[[m.a,m.sa,m.sb,'a'],[m.b,m.sb,m.sa,'b']].forEach(([t,x,y,z])=>t.forEach(n=>{const o=st[n]||(st[n]={n,g:0,w:0,p:0});o.g++;o.p+=x;if(won(m,z,x,y))o.w++})));
+  const rows=Object.values(st).sort((a,b)=>b.p-a.p||b.w-a.w||a.n.localeCompare(b.n)),bl=h.filter(n=>!l.includes(n));
+  return hd.concat(['','🏆 *Klasemen sesi ini*'],rows.length?rows.map((o,i)=>(['🥇','🥈','🥉'][i]||(i+1)+'.')+' '+o.n+' — '+o.g+' main, '+o.w+' menang, '+o.p+' poin'):['-'],['','💰 *Keuangan*'],ex.length?ex.map(e=>'- '+e.n+': '+rp(e.a)):['- (belum ada biaya)'],['Total: '+rp(tot),'Iuran/orang: '+(fee(s)?rp(fee(s)):'-')+' ('+h.length+' hadir)','Tambahan kas: '+rs(kasOf(s).kas),'','✅ Lunas ('+l.length+'): '+(l.join(', ')||'-'),'⏳ Belum lunas ('+bl.length+'): '+(bl.join(', ')||'-')]).join(NL);
+}
+async function copyWa(){const ta=$('#wat');if(ta)ta.select();try{await navigator.clipboard.writeText(wa.t);alert('Teks disalin. Tempel di WhatsApp.')}catch(e){let ok=false;try{ok=document.execCommand('copy')}catch(e2){}alert(ok?'Teks disalin. Tempel di WhatsApp.':'Teks sudah terpilih. Tekan lama lalu pilih Salin.')}}
+function rctx(){
+  const s=curS();if(!s)return null;
+  const lv=L.find(x=>x.id==='roul'),same=lv&&lv.sid===s.id,mode=adm?rmode:(same?lv.mode:'main');
+  const picked=same&&lv.mode===mode?(lv.picked||[]):[],hd=s.hadir||[],cnt={},busy=new Set();
+  hd.forEach(n=>cnt[n]=0);
+  M.filter(m=>m.sid===s.id&&m.st!=='next').forEach(m=>nm(m).forEach(n=>{if(n in cnt)cnt[n]++;if(m.st==='main')busy.add(n)}));
+  let pool;
+  if(mode==='main'){const c=picked.length>=4?[]:hd.filter(n=>!busy.has(n)&&!picked.includes(n)),mn=Math.min(...c.map(n=>cnt[n]));pool=c.filter(n=>cnt[n]===mn)}
+  else pool=hd.filter(n=>!picked.includes(n));
+  return {s,mode,picked,pool,fresh:pool.length>0&&pool.every(n=>cnt[n]===0)};
+}
+function wheel(pool){
+  const n=pool.length,th=360/n,pt=(a,r)=>[(100+r*Math.sin(a*Math.PI/180)).toFixed(1),(100-r*Math.cos(a*Math.PI/180)).toFixed(1)],fs=n>16?6:n>10?8:10;
+  let s='';
+  if(n===1)s=`<circle cx="100" cy="100" r="95" fill="hsl(150 55% 40%)"/><text x="100" y="104" text-anchor="middle" fill="#fff" font-size="12">${esc(pool[0])}</text>`;
+  else pool.forEach((p,i)=>{const a=pt(i*th,95),b=pt((i+1)*th,95),m=(i+.5)*th;s+=`<path d="M100 100L${a[0]} ${a[1]}A95 95 0 ${th>180?1:0} 1 ${b[0]} ${b[1]}Z" fill="hsl(${Math.round(i*360/n)} 55% 40%)" stroke="#fff" stroke-width="1"/><text x="122" y="${100+fs/3}" transform="rotate(${m-90} 100 100)" fill="#fff" font-size="${fs}">${esc(p.slice(0,9))}</text>`});
+  return `<div style="position:relative;max-width:300px;margin:8px auto;padding-top:16px"><div style="position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:22px;z-index:1;line-height:1">▼</div><svg id="wh" viewBox="0 0 200 200" style="width:100%;transform:rotate(${rot}deg)">${s}</svg></div>`;
+}
+function roul(){
+  const c=rctx();if(!c)return '<p class="mu">Belum ada jadwal.</p>';
+  const {s,mode,picked,pool}=c;
+  const info=mode==='main'?(picked.length>=4?'Empat pemain sudah terpilih — jadikan pertandingan.':'Peserta: pemain hadir yang '+(c.fresh?'belum main':'paling sedikit main')+' dan tidak sedang bertanding. Putar 4 kali: 2 pertama jadi Tim A, 2 berikutnya Tim B.'):'Peserta: semua yang hadir. Yang sudah keluar tidak ikut putaran berikutnya.';
+  let h=`<div class="card"><label>Sesi</label>${selH(s)}${adm?`<div class="tb" style="margin:6px 0"><button class="s ${mode==='main'?'':'o'}" data-rm="main">🎯 Siapa main berikutnya</button><button class="s ${mode==='undi'?'':'o'}" data-rm="undi">🎁 Undian bebas</button></div>`:`<div class="mu">${mode==='main'?'🎯 Siapa main berikutnya':'🎁 Undian bebas'}</div>`}<div class="mu">${info}</div>`;
+  if(adm){h+=pool.length?wheel(pool)+'<button data-spin="1" style="width:100%">🎰 Putar!</button>':'<div class="mu" style="margin-top:8px">Tidak ada peserta tersedia.</div>';if(lw)h+=`<div class="w" style="text-align:center;margin-top:8px;font-size:1.2rem">🎉 ${esc(lw)}</div>`}
+  h+='</div>';
+  return h+`<div class="card"><b>Hasil</b>${picked.map((n,i)=>`<div class="row"><span>${i+1}. ${esc(n)} ${LV(n)}</span><span class="mu">${mode==='main'?'Tim '+(i<2?'A':'B'):''}</span></div>`).join('')||'<div class="mu">Belum ada putaran.</div>'}${mode==='main'&&picked.length>=4?`<div class="mu" style="margin-top:6px">${bal({a:[picked[0],picked[1]],b:[picked[2],picked[3]]})}</div>`:''}${adm&&picked.length?`<div class="tb" style="margin-top:8px">${mode==='main'&&picked.length>=4?'<button class="s" data-mkm="1">Jadikan pertandingan (langsung main)</button>':''}<button class="s d o" data-rr="1">Reset</button></div>`:''}</div>`;
+}
+async function resetLive(mode){const s=curS();if(!s)return;await db.doc('live/roul').set({sid:s.id,mode:mode||rmode,picked:[],at:Date.now()})}
+async function mkm(){const c=rctx();if(!c||c.picked.length<4)return;const p=c.picked,rnd=Math.max(0,...M.filter(m=>m.sid===c.s.id).map(m=>m.rnd||0))+1;await db.collection('matches').add({sid:c.s.id,rnd,a:[p[0],p[1]],b:[p[2],p[3]],st:'main',sa:null,sb:null,note:'',rest:[],at:Date.now()});lw='';await resetLive(c.mode)}
+function spin(){
+  if(spinning)return;
+  const c=rctx();if(!c||!c.pool.length){alert('Tidak ada peserta tersedia untuk diputar.');return}
+  const pool=c.pool,n=pool.length,i=Math.floor(Math.random()*n),th=360/n,el=$('#wh');if(!el)return;
+  spinning=true;rot=360*5-(i+.5)*th+(Math.random()-.5)*th*.6;
+  el.style.transition='transform 4.5s cubic-bezier(.12,.7,.1,1)';el.style.transform='rotate('+rot+'deg)';
+  setTimeout(async()=>{
+    spinning=false;rot=0;lw=pool[i];
+    try{await db.doc('live/roul').set({sid:c.s.id,mode:c.mode,picked:c.picked.concat([pool[i]]),at:Date.now()})}catch(e){alert('Gagal menyimpan hasil putaran.')}
+    render();
+  },4700);
+}
+const LVN={1:'Pemula',2:'Menengah',3:'Mahir'},LVE={1:'🟢',2:'🟡',3:'🔴'};
+const lvOf=n=>{const p=P.find(x=>x.name===n);return p&&p.lv?p.lv:2};
+const LV=n=>LVE[lvOf(n)]||'';
+const tm=a=>a.map(n=>esc(n)+' '+LV(n)).join(' &amp; ');
+const bal=m=>{const d=Math.abs(lvOf(m.a[0])+lvOf(m.a[1])-lvOf(m.b[0])-lvOf(m.b[1]));return d===0?'⚖️ Seimbang':d===1?'⚖️ Cukup seimbang':'⚠️ Selisih level '+d};
+function ed(k,s){
+  const hd=(s.hadir||[]).slice(),sl=i=>{const key='q'+i+k,cur=g(key,''),ns=hd.concat(cur&&!hd.includes(cur)?[cur]:[]);return `<select data-d="${key}"><option value="">— pilih —</option>${ns.map(n=>`<option value="${esc(n)}" ${n===cur?'selected':''}>${esc(n)} ${LV(n)}</option>`).join('')}</select>`};
+  return `<div class="mu">Tim A</div><div class="g2">${sl(0)}${sl(1)}</div><div class="mu">Tim B</div><div class="g2">${sl(2)}${sl(3)}</div><div class="tb"><button class="s" data-sp="${k}">Simpan pasangan</button><button class="s o" data-ex="1">Batal</button></div>`;
+}
+const tot0=s=>(s.exp||[]).reduce((a,e)=>a+(+e.a||0),0);
+const fee=s=>{const h=(s.hadir||[]).length;return s.iuran>0?+s.iuran:(h?cu(tot0(s)/h):0)};
+const kasOf=s=>{const h=s.hadir||[],l=(s.lunas||[]).filter(n=>h.includes(n)).length,f=fee(s),t=tot0(s);return{tot:t,fee:f,n:h.length,l,coll:l*f,kas:l*f-t,kpot:h.length*f-t}};
+const rs=n=>(n<0?'−':'')+rp(Math.abs(n));
+const sdt=d=>{try{return new Date(d+'T00:00').toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'2-digit'})}catch(e){return d}};
+function kas(){
+  const rows=S.filter(s=>(s.hadir||[]).length||(s.exp||[]).length).sort((a,b)=>b.date.localeCompare(a.date)).map(s=>({s,k:kasOf(s)}));
+  const tot=rows.reduce((a,r)=>a+r.k.kas,0),pot=rows.reduce((a,r)=>a+r.k.kpot,0);
+  return `<div class="card"><b>💰 Kas jalan-jalan akhir tahun</b><div class="${tot>=0?'w':''}" style="font-size:1.8rem;margin:6px 0">${rs(tot)}</div><div class="mu">Selisih iuran yang sudah terkumpul (lunas) dikurangi pengeluaran, dijumlahkan dari semua sesi.${pot!==tot?' Jika semua iuran sudah lunas: '+rs(pot)+'.':''}</div></div><div class="card"><b>Per minggu</b><div class="x"><table><tr><th>Tanggal</th><th>Iuran</th><th>Biaya</th><th>Kas</th></tr>${rows.map(r=>`<tr><td>${esc(sdt(r.s.date))}</td><td>${rp(r.k.coll)}</td><td>${rp(r.k.tot)}</td><td class="${r.k.kas>=0?'w':''}">${r.k.kas>=0?'+':''}${rs(r.k.kas)}</td></tr>`).join('')||'<tr><td colspan=4 class="mu">Belum ada data.</td></tr>'}</table></div></div><div class="card"><button class="o" data-csv="k">Unduh CSV kas mingguan</button></div>`;
+}
+const won=(m,z,x,y)=>m.gw?(z==='a'?m.gw[0]>m.gw[1]:m.gw[1]>m.gw[0]):x>y;
+const cl=o=>JSON.parse(JSON.stringify(o));
+function lsPoint(s,t){
+  if(s.over)return s;
+  if(t===s.srv){const k=t==='a'?'pa':'pb';s[k]=[s[k][1],s[k][0]]}else s.srv=t;
+  s[t==='a'?'ga':'gb']++;
+  const a=s.ga,b=s.gb,mx=Math.max(a,b);
+  if((mx>=21&&Math.abs(a-b)>=2)||mx===30){
+    s.gm=(s.gm||[]).concat([[a,b]]);
+    const wa=s.gm.filter(x=>x[0]>x[1]).length,wb=s.gm.length-wa;
+    if(wa<2&&wb<2){s.ga=0;s.gb=0;s.srv=a>b?'a':'b';s.sw=!s.sw;s.mid=0;s.msg='Set '+s.gm.length+' selesai ('+a+'-'+b+'). Tukar sisi, set '+(s.gm.length+1)+' dimulai.'}
+    else s.over=1;
+  }else if(s.gm.length===2&&!s.mid&&mx===11){s.mid=1;s.sw=!s.sw;s.msg='Skor 11 — interval & tukar sisi!'}
+  return s;
+}
+async function lsSet(fn){
+  const m=M.find(x=>x.id===lsId);if(!adm||!m||!m.ls||lsBusy)return;
+  lsBusy=true;setTimeout(()=>lsBusy=false,180);
+  const prev=cl(m.ls);delete prev.h;const s=cl(m.ls);s.h=(s.h||[]).concat([prev]).slice(-30);s.msg='';
+  await db.doc('matches/'+lsId).update({ls:fn(s)});
+}
+async function lsUndo(){
+  const m=M.find(x=>x.id===lsId);if(!adm||!m||!m.ls)return;
+  const h=(m.ls.h||[]).slice();if(!h.length){alert('Tidak ada langkah yang bisa dibatalkan.');return}const p=h.pop();p.h=h;p.msg='↶ Dibatalkan · skor '+p.ga+' – '+p.gb;
+  await db.doc('matches/'+lsId).update({ls:p});
+}
+async function lsSave(){
+  const m=M.find(x=>x.id===lsId);if(!m||!m.ls||!m.ls.over)return;
+  const gm=m.ls.gm,wa=gm.filter(x=>x[0]>x[1]).length;
+  await db.doc('matches/'+lsId).update({sa:gm.reduce((a,x)=>a+x[0],0),sb:gm.reduce((a,x)=>a+x[1],0),gw:[wa,gm.length-wa],gs:gm,st:'done'});
+  closeLs();
+}
+function lsRender(){
+  const el=$('#ls'),m=M.find(x=>x.id===lsId);
+  if(!m){el.style.display='none';return}
+  el.style.display='block';
+  {const sg=JSON.stringify([m.ls,m.st,adm]);if(sg===lsSig&&el.firstChild)return;lsSig=sg}
+  const s=m.ls,bar=`<div class="lsbar"><button class="lsb" data-lc="1">✕ Tutup</button><span class="lsti">Ronde ${m.rnd||1}${adm?'':' · 👀 Mode tonton'}</span>${adm&&s?`<button class="lsb" data-lu="1" ${(s.h||[]).length?'':'disabled'}>↶ Undo${(s.h||[]).length?' ('+s.h.length+')':''}</button><button class="lsb" data-lw="s">⇄ Sisi</button><button class="lsb" data-lw="a">⇄ Tim A</button><button class="lsb" data-lw="b">⇄ Tim B</button>${s.ga+s.gb===0?'<button class="lsb" data-lw="v">🏸 Servis awal</button>':''}`:''}<button class="lsb" data-lf="1">⛶</button><span class="lsrot">↻ Putar HP ke landscape</span></div>`;
+  if(!s){el.innerHTML=`<div class="lsg">${bar}<div class="lsw">${adm?'Memuat…':'Wasit belum memulai pertandingan ini.'}</div></div>`;return}
+  const ci=(s.srv==='a'?s.ga:s.gb)%2,oth=s.srv==='a'?'b':'a',pos={a:s.pa,b:s.pb},col={a:'#1f9d63',b:'#2f7de1'};
+  const wins={a:s.gm.filter(x=>x[0]>x[1]).length};wins.b=s.gm.length-wins.a;
+  const lt=s.sw?'b':'a',rt=s.sw?'a':'b',bump={};
+  if(lsPrev&&lsPrev.id===m.id){if(lsPrev.ga!==s.ga)bump.a=1;if(lsPrev.gb!==s.gb)bump.b=1}
+  lsPrev={id:m.id,ga:s.ga,gb:s.gb};
+  const pan=(t,side)=>{
+    const isS=s.srv===t&&!s.over,order=side==='L'?[1,0]:[0,1];
+    const slot=i=>{const sv=isS&&i===ci,rc=!s.over&&s.srv!==t&&i===ci;return `<div class="lss ${sv?'sv':''} ${rc?'rc':''}"><div class="lsl">${i?'KIRI':'KANAN'}</div><div class="lsn">${esc(pos[t][i])}</div>${sv?'<div class="lsbd">🏸 SERVIS</div>':rc?'<div class="lsbd r">TERIMA</div>':''}</div>`};
+    return `<div class="lsp ${isS?'on':''}" style="--tc:${col[t]}"><div class="lst">TIM ${t.toUpperCase()}</div>${order.map(slot).join('')}<button class="lsc ${bump[t]?'bump':''}" data-lp="${t}" ${adm&&!s.over?'':'disabled'}>${t==='a'?s.ga:s.gb}</button></div>`;
+  };
+  const dots=t=>[0,1].map(i=>`<i class="${i<wins[t]?'f':''}" style="--c:${col[t]}"></i>`).join('');
+  const mid=`<div class="lsmid"><div class="lsset">${s.over?'SELESAI':'SET '+(s.gm.length+1)}</div><div class="lsdots">${dots(lt)}<b>–</b>${dots(rt)}</div>${s.gm.length?`<div class="lshist"><small>Set selesai (A–B)</small>${s.gm.map(x=>`<div>${x[0]}–${x[1]}</div>`).join('')}</div>`:''}${s.over?'':`<div class="lsinfo">🏸 <b>${esc(pos[s.srv][ci])}</b><small>servis dari ${ci?'KIRI · skor ganjil':'KANAN · skor genap'}</small>↓<div>${esc(pos[oth][ci])}</div><small>penerima</small></div>`}${adm&&(s.h||[]).length&&!s.over?'<button class="lsb" data-lu="1">↶ Undo</button>':''}</div>`;
+  const wt=wins.a>wins.b?'a':'b',ov=s.over?`<div class="lsov"><div class="lsbox"><div>🏆 Pemenang</div><div class="lswn" style="color:${col[wt]}">${esc(pos[wt].join(' & '))}</div><div>${wins.a} – ${wins.b} set · ${s.gm.map(x=>x[0]+'-'+x[1]).join(' · ')}</div>${adm?'<div class="tb" style="justify-content:center"><button class="lsb big" data-lsv="1">✅ Simpan hasil</button><button class="lsb" data-lu="1">↶ Undo</button></div>':'<div class="lsw">Menunggu wasit menyimpan hasil…</div>'}</div></div>`:'';
+  el.innerHTML=`<div class="lsg">${bar}<div class="lsm">${pan(lt,'L')}${mid}${pan(rt,'R')}</div>${s.msg?`<div class="lsmsg">${esc(s.msg)}</div>`:''}${ov}</div>`;
+}
+$('#ls').onclick=async e=>{
+  const b=e.target.closest('button');if(!b||b.disabled)return;const d=b.dataset;
+  try{
+    if(d.lc)closeLs();
+    else if(d.lf){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
+    else if(!adm)return;
+    else if(d.lp){try{navigator.vibrate&&navigator.vibrate(25)}catch(x){}await lsSet(s=>lsPoint(s,d.lp))}
+    else if(d.lu)await lsUndo();
+    else if(d.lw)await lsSet(s=>{if(d.lw==='s')s.sw=!s.sw;else if(d.lw==='v')s.srv=s.srv==='a'?'b':'a';else{const k=d.lw==='a'?'pa':'pb';s[k]=[s[k][1],s[k][0]]}return s});
+    else if(d.lsv)await lsSave();
+  }catch(err){alert('Gagal menyimpan skor. Cek koneksi internet.')}
+};
+async function openLs(id){
+  const m=M.find(x=>x.id===id);if(!m)return;
+  lsId=id;lsPrev=null;lsSig='';document.body.style.overflow='hidden';lsRender();
+  try{await document.documentElement.requestFullscreen()}catch(e){}
+  try{await screen.orientation.lock('landscape')}catch(e){}
+  try{lsWake=await navigator.wakeLock.request('screen')}catch(e){}
+  if(adm&&!m.ls)await db.doc('matches/'+id).update({st:m.st==='next'?'main':m.st,ls:{ga:0,gb:0,srv:'a',pa:[m.a[0],m.a[1]],pb:[m.b[0],m.b[1]],sw:false,gm:[],mid:0,over:0,msg:'',h:[]}});
+}
+function closeLs(){
+  lsId='';lsSig='';$('#ls').style.display='none';document.body.style.overflow='';
+  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+  try{screen.orientation.unlock()}catch(e){}
+  try{if(lsWake){lsWake.release();lsWake=null}}catch(e){}
+  render();
+}
+const podium=rows=>{const t=rows.filter(o=>o.g>0).slice(0,3);if(!t.length)return '';const em=['🏆','🥈','🥉'],ord=t.length>=3?[1,0,2]:t.map((_,i)=>i);return `<div class="pod">${ord.map(i=>`<div class="p${i+1}"><div class="em">${em[i]}</div><div class="nm">${esc(t[i].n)}</div><div class="pt">${t[i].p}</div><div class="mu">${t[i].w}/${t[i].g} menang</div></div>`).join('')}</div>`};
+function render(){
+  if(lsId)lsRender();if(spinning){pend=true;return}const a=document.activeElement;if(a&&a.dataset&&a.dataset.d){pend=true;return}
+  $('#role').textContent=db?(adm?'Mode admin — bisa input & edit':'Mode lihat saja'):'Memuat…';
+  if(db)$('#v').innerHTML=waCard()+({j:jadwal,k:klas,r:roul,c:kas,p:players})[tab]();
+}
+document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.d;if(k)D[k]=e.target.value});
+document.addEventListener('focusout',()=>{if(pend){pend=false;setTimeout(render,350)}});
+document.addEventListener('change',e=>{if(e.target.id==='sel'){selS=e.target.value;render()}else if(adm&&e.target.dataset&&e.target.dataset.pl)db.doc('players/'+e.target.dataset.pl).update({lv:+e.target.value}).catch(()=>alert('Gagal mengubah level.'))});
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));render()});
+async function gen(sid){
+  const s=S.find(x=>x.id===sid),hd=s.hadir||[],ms=M.filter(m=>m.sid===sid),busy=new Set();
+  ms.filter(m=>m.st==='main').forEach(m=>nm(m).forEach(n=>busy.add(n)));
+  const av=hd.filter(n=>!busy.has(n));
+  if(av.length<4){alert(hd.length<4?'Minimal 4 pemain hadir untuk main 2 lawan 2.':'Pemain yang tersedia kurang dari 4 (sisanya sedang main).');return}
+  const cn=Math.min(Math.max(parseInt(g('ct',1))||1,1),Math.floor(av.length/4)),cnt={};
+  av.forEach(n=>cnt[n]=0);ms.filter(m=>m.st!=='next').forEach(m=>nm(m).forEach(n=>{if(n in cnt)cnt[n]++}));
+  const pool=sh(av).sort((x,y)=>cnt[x]-cnt[y]),play=pool.slice(0,cn*4),rest=pool.slice(cn*4),tg=new Set();
+  ms.forEach(m=>{tg.add(m.a.slice().sort().join('|'));tg.add(m.b.slice().sort().join('|'))});
+  let best=null,bs=1e9;
+  for(let t=0;t<40;t++){
+    const q=sh(play),res=[];let sc=0;
+    for(let c=0;c<cn;c++){
+      const g4=q.slice(c*4,c*4+4),opts=[[[g4[0],g4[1]],[g4[2],g4[3]]],[[g4[0],g4[2]],[g4[1],g4[3]]],[[g4[0],g4[3]],[g4[1],g4[2]]]];
+      let bo=null,bv=1e9;
+      opts.forEach(o=>{const v=Math.abs(lvOf(o[0][0])+lvOf(o[0][1])-lvOf(o[1][0])-lvOf(o[1][1]))*10+o.filter(tt=>tg.has(tt.slice().sort().join('|'))).length*3+Math.random();if(v<bv){bv=v;bo=o}});
+      res.push(bo);sc+=bv;
+    }
+    if(sc<bs){bs=sc;best=res}
+  }
+  const rnd=Math.max(0,...ms.map(m=>m.rnd||0))+1;
+  await Promise.all(ms.filter(m=>m.st==='next').map(m=>db.doc('matches/'+m.id).delete()));
+  for(let c=0;c<cn;c++){await db.collection('matches').add({sid,rnd,a:best[c][0],b:best[c][1],st:'next',sa:null,sb:null,note:'',rest,at:Date.now()+c})}
+}
+async function saveScore(id){
+  const a=g('a'+id,undefined),b=g('b'+id,undefined),m=M.find(x=>x.id===id);
+  const sa=a!==undefined?a:m.sa,sb=b!==undefined?b:m.sb;
+  if(sa===''||sb===''||sa==null||sb==null){alert('Isi kedua skor dulu.');return}
+  await db.doc('matches/'+id).update({sa:+sa,sb:+sb,st:'done',note:String(g('n'+id,m.note||'')).trim()});
+  ['a','b','n'].forEach(p=>delete D[p+id]);
+}
+const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+async function csv(kind){
+  const sd=id=>S.find(x=>x.id===id)||{};let rows;
+  if(kind==='h'){rows=[['Tanggal','Jam','Lokasi','Total biaya','Iuran per orang','Nama','Lunas']];S.slice().sort((a,b)=>a.date.localeCompare(b.date)).forEach(s=>{const h=s.hadir||[],tot=(s.exp||[]).reduce((a,e)=>a+(+e.a||0),0);h.forEach(n=>rows.push([s.date,s.time,s.venue,tot,fee(s),n,(s.lunas||[]).includes(n)?'ya':'tidak']))})}
+  else if(kind==='k')rows=[['Tanggal','Hadir','Lunas','Iuran per orang','Total biaya','Iuran terkumpul','Tambahan kas','Kas jika semua lunas']].concat(S.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(s=>{const k=kasOf(s);return[s.date,k.n,k.l,k.fee,k.tot,k.coll,k.kas,k.kpot]}));
+  else rows=[['Tanggal','Ronde','Status','Tim A','Tim B','Skor A','Skor B','Set','Refleksi']].concat(M.map(m=>[sd(m.sid).date,m.rnd,m.st,m.a.join(' & '),m.b.join(' & '),m.sa,m.sb,(m.gs||[]).map(x=>x[0]+'-'+x[1]).join(' | '),m.note]));
+  const data='\ufeff'+rows.map(r=>r.map(q).join(',')).join('\r\n');
+  const fn=kind==='h'?'asmr-kehadiran-iuran.csv':kind==='k'?'asmr-kas-mingguan.csv':'asmr-pertandingan.csv';
+  try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/csv;charset=utf-8'}));a.download=fn;document.body.appendChild(a);a.click();a.remove()}catch(e){}
+  wa={title:'CSV '+fn+' — jika unduhan tidak berjalan, salin teks ini lalu tempel ke Google Sheets',t:data};render();scrollTo({top:0,behavior:'smooth'});
+}
+$('#v').onclick=async e=>{
+  const b=e.target.closest('button'),c=e.target.closest('input[data-lu]');
+  if(!adm&&!(b&&(b.dataset.csv||b.dataset.live)))return;
+  const ds=(b||c||{}).dataset||{},sOf=id=>S.find(x=>x.id===id);
+  try{
+    if(c){const s=sOf(ds.lu),l=(s.lunas||[]).filter(x=>x!==ds.n);if(c.checked)l.push(ds.n);await db.doc('sessions/'+s.id).update({lunas:l})}
+    else if(!b)return;
+    else if(ds.csv)csv(ds.csv);
+    else if(ds.live)await openLs(ds.live);
+    else if(ds.wa){const s=sOf(ds.wa);wa={title:ds.k==='a'?'Absensi kehadiran':'Klasemen & keuangan',t:waText(s,ds.k)};render();scrollTo({top:0,behavior:'smooth'})}
+    else if(ds.cpy)copyWa();
+    else if(ds.wx){wa=null;render()}
+    else if(ds.cp){const s=ds.cp==='last'?S.slice().sort((a,b)=>b.date.localeCompare(a.date))[0]:sOf(ds.cp);if(!s){alert('Belum ada sesi untuk disalin.');return}cp=s;editId='';fo=true;D.fd=add7(s.date);D.ft=s.time||'';D.fv=s.venue||'';D.fn=s.note||'';render();scrollTo({top:0,behavior:'smooth'})}
+    else if(ds.rm){rmode=ds.rm;lw='';await resetLive(ds.rm)}
+    else if(ds.spin)spin();
+    else if(ds.fee){const id=ds.fee,v=String(g('ip'+id,'')).trim(),n=v===''?0:Math.round(+v);if(!(n>=0)){alert('Nominal tidak valid.');return}await db.doc('sessions/'+id).update({iuran:n});delete D['ip'+id]}
+    else if(ds.em){const k=ds.em;em=k;if(k==='new')[0,1,2,3].forEach(i=>delete D['q'+i+'new']);else{const m=M.find(x=>x.id===k);[m.a[0],m.a[1],m.b[0],m.b[1]].forEach((n,i)=>D['q'+i+k]=n)}render()}
+    else if(ds.ex){em='';render()}
+    else if(ds.sp){
+      const k=ds.sp,v=[0,1,2,3].map(i=>String(g('q'+i+k,'')));
+      if(v.some(x=>!x)||new Set(v).size<4){alert('Pilih 4 pemain berbeda.');return}
+      if(k==='new'){const s=curS(),rnd=Math.max(0,...M.filter(m=>m.sid===s.id).map(m=>m.rnd||0))+1;await db.collection('matches').add({sid:s.id,rnd,a:[v[0],v[1]],b:[v[2],v[3]],st:'next',sa:null,sb:null,note:'',rest:[],at:Date.now()})}
+      else await db.doc('matches/'+k).update({a:[v[0],v[1]],b:[v[2],v[3]]});
+      [0,1,2,3].forEach(i=>delete D['q'+i+k]);em='';render();
+    }
+    else if(ds.rr){lw='';await resetLive()}
+    else if(ds.mkm)await mkm();
+    else if(ds.att){const s=sOf(ds.att),h=(s.hadir||[]).slice(),i=h.indexOf(ds.n);if(i<0)h.push(ds.n);else h.splice(i,1);await db.doc('sessions/'+s.id).update({hadir:h,lunas:(s.lunas||[]).filter(x=>h.includes(x))})}
+    else if(ds.ax){const s=sOf(ds.ax),n=String(g('en'+s.id,'')).trim(),a=+g('ea'+s.id,0);if(!n||!(a>0)){alert('Isi nama biaya dan jumlah.');return}await db.doc('sessions/'+s.id).update({exp:(s.exp||[]).concat([{n,a}])});delete D['en'+s.id];delete D['ea'+s.id]}
+    else if(ds.rx){const s=sOf(ds.rx);await db.doc('sessions/'+s.id).update({exp:(s.exp||[]).filter((_,i)=>i!==+ds.i)})}
+    else if(ds.fo){fo=true;render()}
+    else if(ds.fx){cp=null;editId='';fo=false;['fd','ft','fv','fn'].forEach(k=>delete D[k]);render()}
+    else if(ds.edit){const s=sOf(ds.edit);cp=null;editId=s.id;fo=true;D.fd=s.date;D.ft=s.time||'';D.fv=s.venue||'';D.fn=s.note||'';render();scrollTo({top:0,behavior:'smooth'})}
+    else if(ds.fs){
+      const d=g('fd',today());if(!d){alert('Isi tanggal dulu.');return}
+      const o={date:d,time:g('ft','19:00'),venue:String(g('fv','')).trim(),note:String(g('fn','')).trim()};
+      if(editId)await db.doc('sessions/'+editId).update(o);else await db.collection('sessions').add({...o,hadir:cp?(cp.hadir||[]):[],lunas:[],exp:cp?(cp.exp||[]):[],iuran:cp?(cp.iuran||0):0,at:Date.now()});
+      cp=null;editId='';fo=false;['fd','ft','fv','fn'].forEach(k=>delete D[k]);render();
+    }
+    else if(ds.del){
+      const id=ds.del;
+      if(armed!==id){armed=id;render();setTimeout(()=>{if(armed===id){armed='';render()}},3000);return}
+      armed='';await db.doc('sessions/'+id).delete();
+      await Promise.all(M.filter(x=>x.sid===id).map(x=>db.doc('matches/'+x.id).delete()));
+    }
+    else if(ds.ap){
+      const have=new Set(P.map(p=>p.name.toLowerCase())),ns=String(g('pn','')).split(/[,\n]/).map(x=>x.trim()).filter(Boolean);
+      for(const n of ns){if(have.has(n.toLowerCase()))continue;have.add(n.toLowerCase());await db.collection('players').add({name:n,lv:+g('plv',2),at:Date.now()})}
+      delete D.pn;render();
+    }
+    else if(ds.rp)await db.doc('players/'+ds.rp).delete();
+    else if(ds.gen)await gen(ds.gen);
+    else if(ds.go)await db.doc('matches/'+ds.go).update({st:'main'});
+    else if(ds.sv)await saveScore(ds.sv);
+    else if(ds.rmm)await db.doc('matches/'+ds.rmm).delete();
+  }catch(err){alert('Gagal menyimpan. Gagal menyimpan. Pastikan kamu masuk sebagai admin dan koneksi internet aktif.')}
+};
+let user=null;
+// Firestore tidak mengizinkan array di dalam array, jadi dibungkus saat simpan dan dibuka saat baca.
+const enc=v=>Array.isArray(v)?v.map(x=>Array.isArray(x)?{_:enc(x)}:enc(x)):(v&&typeof v==='object'?Object.fromEntries(Object.entries(v).filter(e=>e[1]!==undefined).map(e=>[e[0],enc(e[1])])):v);
+const dec=v=>Array.isArray(v)?v.map(x=>x&&typeof x==='object'&&!Array.isArray(x)&&Array.isArray(x._)?dec(x._):dec(x)):(v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(e=>[e[0],dec(e[1])])):v);
+if(firebaseConfig.apiKey==='ISI'){
+  $('#role').textContent='Belum dikonfigurasi';
+  $('#v').innerHTML='<div class="card"><b>Firebase belum diisi</b><div class="mu">Isi <code>firebaseConfig</code> dan <code>ADMINS</code> di bagian atas script file ini. Ikuti PANDUAN.md.</div></div>';
+}else{
+  const fb=initializeApp(firebaseConfig),fdb=getFirestore(fb),fa=getAuth(fb);
+  db={collection:c=>({add:async d=>{const r=await addDoc(collection(fdb,c),enc(d));return{id:r.id}}}),
+      doc:p=>{const k=p.split('/'),r=doc(fdb,k[0],k[1]);return{set:d=>setDoc(r,enc(d)),update:d=>updateDoc(r,enc(d)),delete:()=>deleteDoc(r)}}};
+  const ui=()=>{
+    $('#lg').innerHTML=user?`<span class="mu">${esc(user.email)}${adm?' · admin':' · bukan admin'}</span> <button class="s o" id="lo">Keluar</button>`:'<button class="s" id="li">Masuk admin (Google)</button>';
+    if(user)$('#lo').onclick=()=>signOut(fa);
+    else $('#li').onclick=()=>signInWithPopup(fa,new GoogleAuthProvider()).catch(e=>alert('Gagal masuk: '+e.message));
+  };
+  const sub=(c,f)=>onSnapshot(collection(fdb,c),s=>{f(s.docs.map(d=>Object.assign({id:d.id},dec(d.data()))));render()},()=>{$('#v').innerHTML='<p class="mu">Data belum bisa dimuat. Periksa koneksi internet dan aturan Firestore.</p>'});
+  sub('sessions',x=>S=x);sub('players',x=>P=x);sub('matches',x=>M=x);sub('live',x=>L=x);
+  onAuthStateChanged(fa,u=>{user=u;adm=!!(u&&u.emailVerified&&ADMINS.map(x=>x.toLowerCase()).includes((u.email||'').toLowerCase()));ui();render()});
+  ui();render();
+}
+
+</script></body></html>
